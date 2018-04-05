@@ -36,8 +36,8 @@ Clonando la carpeta /var/www de la maquina 1 en la maquina 2
 
 En el caso de que queramos copiar un directorio en concreto e ignorar otros utilizaremos el siguiente comando: 
 
-**rsync -avz --delete --exclude=**/stats --exclude=**/error
-exclude=**/files/pictures -e ssh maquina1:/var/www/ /var/www/**
+**rsync -avz --delete --exclude=\*\*/stats --exclude=\*\*/error
+exclude=\*\*/files/pictures -e ssh maquina1:/var/www/ /var/www/**
 
 En este caso estamos haciendo la copia del directorio /var/www pero ignorando /var/www/error, /var/www/stats y /var/www/files/pictures
 
