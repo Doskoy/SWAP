@@ -7,7 +7,9 @@
 ## Objetivos 
 I. Copiar archivos mediante ssh  
 II. Clonar contenido entre máquinas	
-III. Configurar ssh para acceder a máquinas remotas sin contraseña	
+
+III. Configurar ssh para acceder a máquinas remotas sin contraseña
+	
 IV. Establecer tareas en cron 	
 
 ## -Pasos previos  
