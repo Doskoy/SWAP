@@ -1,6 +1,4 @@
-﻿# Practica 1 SWAP   
-
-### Preparación de las herramientas
+﻿# Practica 2 SWAP   
 
 ###### Autores: Antonio Carrasco Castro, Fernado Roldán Zafra  
 
