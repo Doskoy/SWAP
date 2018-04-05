@@ -5,47 +5,62 @@
 ###### Autores: Antonio Carrasco Castro, Fernado Roldán Zafra  
 
 ## Objetivos 
-I. Acceder por ssh de una máquina a otra  
-II. Acceder mediante la herramienta curl desde una máquina a la otra  
+I. Copiar archivos mediante ssh  
+II. Clonar contenido entre máquinas
+III. Configurar ssh para acceder a máquinas remotas sin contraseña
+IV. Establecer tareas en cron
 
 ## -Pasos previos  
 * **(Instalación de software y máquinas)**  
-Para el comienzo de este apartado, instalaremos el software VMware con el que se instalarán dos máquinas virtuales (en este caso ubuntu server 16.04.4 LTS). Necesitaremos el paquete openSSH y LAMP que como se explica en el guión se puede instalar durante la instalación. Si no se instala ningún paquete se puede hacer mediante linea de comandos una vez instalado con: 
-	
-	Para el paquete openSHH:  
-**sudo apt-get install openssh-server openssh-client**
-	
-	Para el paquete LAMP:  
- **sudo apt-get install apache2**  
- **sudo apt-get install mysql-server mysql-client**  
-**sudo apt-get install php7.0-mysql php7.0-curl php7.0-json php7.0-cgi  php7.0 libapache2-mod-php7**  
+Para el realizar esta práctica se han utilizado las máquinas virtuales que se crearon para la realización de la práctica anterior. Ademas de esto, es necesario instalar la herramienta rsync utilizando el siguiente comando:	
 
-Dejo un posible tutorial facilitado en el guión a seguir:
+**sudo apt-get install rsync**
+ 
+Para copiar ficheros o directamente crearlos en un equipo remoto, podemos utilizar varios metodos:
 
-[Referencia instalar LAMP](https://www.unixmen.com/how-to-install-lamp-stack-on-ubuntu-16-04/)  
-
-## -Sesión 1  
-Una vez instalado procedemos al objetivo uno, conexión SSH:
+1.- Redirigir la salida de stdout con un pipeline hacia el ssh.
 
 ### Nota ###  
-Levantar ssh-> sudo /etc/init.d/ssh start  
-Conectarse-> ssh user@ipUser  
+Este metodo sirve como algo puntual, pero en el caso de que queramos sincronizar grandes cantidades de datos tendremos que utilizar el metodo descrito mas abajo.
 
-![img](https://github.com/jonio1992/SWAP/blob/master/practica1/img/1.png)  
-Levantando el servicio ssh de la maquina swap1 y visualizando su ip.
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica2/img/1.PNG)  
+Creando un .tar en un equipo remoto utilizando ssh.
 
-![img](https://github.com/jonio1992/SWAP/blob/master/practica1/img/2.png)  
-Levantando el servicio ssh de la maquina swap2 y visualizando su ip.
+2.-Utilizar la herramienta rsync.
+Para clonar en la maquina 2 el contenido de una carpeta concreta de la maquina 1 utilizaremos el siguiente comando: 
 
-![img](https://github.com/jonio1992/SWAP/blob/master/practica1/img/3.png)  
-Conectándonos desde el PC anfitrión a las maquinas mediante el protocolo SSH.
+**rsync -avz -e ssh ubuntu1@192.168.125.128:/var/www /var/www**
 
-Para el objetivo dos se va a generar un archivo .html el cual se pondrá en el directorio var/www/sesion1.  
-Procedemos a ver las direcciones ip de cada máquina.  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica2/img/2.PNG)  
+Clonando la carpeta /var/www de la maquina 1 en la maquina 2 
 
-![img](https://github.com/jonio1992/SWAP/blob/master/practica1/img/4.png)  
+En el caso de que queramos copiar un directorio en concreto e ignorar otros utilizaremos el siguiente comando: 
 
-Y ahora vamos a hacer una petición a cada máquina con la opción curl.  
-![img](https://github.com/jonio1992/SWAP/blob/master/practica1/img/5.png)  
+**rsync -avz --delete --exclude=**/stats --exclude=**/error
+exclude=**/files/pictures -e ssh maquina1:/var/www/ /var/www/**
 
-Como se ve en la imagen, se puede acceder de la máquina SWAP1 al documento contenido en SWAP2 y viceversa. Adicionalmente desde la máquina anfitrión se ha hecho la petición para comprobar la conexión de todas las máquinas.  
+En este caso estamos haciendo la copia del directorio /var/www pero ignorando /var/www/error, /var/www/stats y /var/www/files/pictures
+
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica2/img/3.PNG)   
+
+Como vemos cada vez que accedemos de una maquina a la otra debemos de introducir la contraseña, y en el caso de que, por ejemplo, queramos defenir una tarea automatica, no podriamos estar constantemente escribiendo la contraseña. Por lo que parece lógico hacer que esta no se pida cada vez. 
+
+Para ello vamos a generar las claves pública y privada. Para ello utilizamos el siguiente comando: 
+**ssh-keygen -b 4096 -t rsa**
+
+Una vez generada la clave en la maquina secundaria utilizamos el comando ssh-copy-id para copiarla en la lista de claves autorizadas de la maquina principal: 
+**ssh-copy-id ubuntu1@192.168.125.128**
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica2/img/4.PNG)  
+
+Una vez hecho esto, la maquina secundaria ya puede conectarse a la principal sin introducir la contraseña
+
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica2/img/5.PNG)
+
+
+Para programar tareas modificaremos el fichero /etc/crontab el cual es utilizado por el proceso cron que lo revisa cada minuto para ver si tiene que ejecutar algun comando. 
+
+En este caso se va a establecer una tarea que se ejecute cada hora para mantener actualizado el contenido del directorio /var/www entre las dos máquinas
+
+Para ello se ha añadido la linea que se puede ver en la siguiente captura al fichero /etc/crontab.
+
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica2/img/6.PNG)
