@@ -45,7 +45,7 @@ En este caso estamos haciendo la copia del directorio /var/www pero ignorando /v
 
 Como vemos cada vez que accedemos de una maquina a la otra debemos de introducir la contraseña, y en el caso de que, por ejemplo, queramos defenir una tarea automatica, no podriamos estar constantemente escribiendo la contraseña. Por lo que parece lógico hacer que esta no se pida cada vez. 
 
-Para ello vamos a generar las claves pública y privada. Para ello utilizamos el siguiente comando: 
+Para ello vamos a generar las claves pública y privada. Para ello utilizamos el siguiente comando:  
 **ssh-keygen -b 4096 -t rsa**
 
 Una vez generada la clave en la maquina secundaria utilizamos el comando ssh-copy-id para copiarla en la lista de claves autorizadas de la maquina principal: 
