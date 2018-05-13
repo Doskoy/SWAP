@@ -46,8 +46,8 @@ Para configurar el cortafuegos existen muchas tipos de configuraciones, yo he op
 
 El script usado es el siguiente:
 
-![img](https://github.com/Doskoy/SWAP/blob/master/Practica3/img/Captura4.JPG)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica4/img/Captura4.JPG)  
 
 Para hacer que se ejecute cada vez que se inicie el sistema añadimos al crontab la siguiente linea: 
 
-![img](https://github.com/Doskoy/SWAP/blob/master/Practica3/img/Captura5.JPG)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica4/img/Captura5.JPG)  
