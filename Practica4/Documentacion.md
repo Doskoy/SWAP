@@ -21,15 +21,15 @@ Vamos a proceder a instalar el certificado en la maquina 1, el procedimiento es 
 
 -En este punto nos pedira que introduzcamos alguna información: 
  
-![img](https://github.com/Doskoy/SWAP/tree/master/Practica4/img/Captura1.png)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica4/img/Captura1.png)  
 
 -Modificamos el archivo /etc/apache2/sites-avaliable/default-ssl.conf añadiendole las 2 lineas que se especifican en el guion de la práctica.
 
-![img](https://github.com/Doskoy/SWAP/tree/master/Practica4/img/Captura2.png)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica4/img/Captura2.png)  
 
 -Para comprobar que el certificado se ha instalado correctamente nos conectamos mediante curl al servidor utilizando el https tal y como se ve a continuación: 
 
-![img](https://github.com/Doskoy/SWAP/tree/master/Practica4/img/Captura6.png)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica4/img/Captura6.png)  
 
 Como se puede ver nos da un error, por lo que debemos utilizar la opción -k para poder conectarnos. Esto significa que funciona conrrectamente.
 
