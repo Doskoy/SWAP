@@ -35,12 +35,12 @@ sudo apt-get install nginx
 
 Pasamos a la configuración de nginx. Una configuración básica sobre el archivo alojado en:   /etc/nginx/conf.d/default.conf  
  
-![img](https://github.com/Doskoy/SWAP/tree/master/Practica3/img/Captura1.png)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica3/img/Captura1.JPG)  
 
 En esta imagen se muestra las ip de las máquinas servidoras y la configuración para la máquina que hará de balaceador de carga.
 
 Como se puede ver, el balanceador funciona correctamente:
-![img](https://github.com/Doskoy/SWAP/tree/master/Practica3/img/Captura2.png)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica3/img/Captura2.JPG)  
 
 
 ### Objetivo II Configurar una máquina e instalar el haproxy como balanceador de carga.
@@ -52,10 +52,10 @@ Para la instalción de haproxy, se han usado los comandos que se comentan en el 
 
 Una vez instalado el programa haproxy en la máquina que va a balancear, nos vamos a su archivo de configuración alojado en: /etc/haproxy/haproxy.cfg.  
 
-![img](https://github.com/Doskoy/SWAP/tree/master/Practica3/img/Captura3.png)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica3/img/Captura3.JPG)  
 
 Se puede ver que el servicio esta activo y que balancea la carga correctamente:
 
-![img](https://github.com/Doskoy/SWAP/tree/master/Practica3/img/Captura4.png)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica3/img/Captura4.JPG)  
 
-![img](https://github.com/Doskoy/SWAP/tree/master/Practica3/img/Captura5.png)  
+![img](https://github.com/Doskoy/SWAP/blob/master/Practica3/img/Captura5.JPG)  
